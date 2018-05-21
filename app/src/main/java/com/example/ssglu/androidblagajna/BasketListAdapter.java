@@ -7,6 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -31,6 +34,18 @@ public class BasketListAdapter extends ArrayAdapter<ArticleClass>{
         LayoutInflater myInflater = LayoutInflater.from(getContext());
         View customView = myInflater.inflate(R.layout.basket_product_list,parent,false);
 
+        if(!getItem(position).isVisible) return customView;
+        TextView tvName = (TextView)customView.findViewById(R.id.tvName);
+        TextView tvPrice = (TextView)customView.findViewById(R.id.tvPrice);
+        EditText tvQuant = (EditText) customView.findViewById(R.id.etQuant);
+        TextView tvCat = (TextView)customView.findViewById(R.id.tvCat);
+        ImageButton btnDel = (ImageButton)customView.findViewById(R.id.imgDel);
+
+
+        tvName.setText(getItem(position).name);
+        tvPrice.setText(String.valueOf(getItem(position).price)+ " kn");
+        tvQuant.setText(String.valueOf(getItem(position).quantity));
+        tvCat.setText(getItem(position).category);
 
 
 
@@ -38,6 +53,7 @@ public class BasketListAdapter extends ArrayAdapter<ArticleClass>{
 
 
 
-        return super.getView(position, convertView, parent);
+
+        return customView;
     }
 }

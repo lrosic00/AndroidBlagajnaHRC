@@ -6,47 +6,53 @@
     android:layout_height="match_parent"
     tools:context=".IndexActivity">
 
-    <TextView
-        android:id="@+id/tvName"
+    <Button
+        android:id="@+id/btnNewReceipt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="Username>"
-        android:textSize="30sp"
+        android:layout_marginTop="32dp"
+        android:text="Create new receipt"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/tvNameData"
+    <Button
+        android:id="@+id/btnAccSettings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:textColor="@android:color/holo_red_light"
-        android:textSize="30sp"
+        android:layout_marginTop="16dp"
+        android:text="Account settings"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvName" />
+        app:layout_constraintTop_toBottomOf="@+id/btnNewReceipt" />
 
-    <TextView
-        android:id="@+id/tvAge"
+    <Button
+        android:id="@+id/btnModDB"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="Age>"
-        android:textSize="30sp"
+        android:layout_marginTop="16dp"
+        android:text="Modify Database"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvNameData" />
+        app:layout_constraintTop_toBottomOf="@+id/btnAccSettings" />
 
-    <TextView
-        android:id="@+id/tvAgeData"
+    <Button
+        android:id="@+id/btnRegister"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:textColor="@android:color/holo_red_dark"
-        android:textSize="30sp"
+        android:layout_marginTop="16dp"
+        android:text="Register new user"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvAge" />
+        app:layout_constraintTop_toBottomOf="@+id/btnModDB" />
 </android.support.constraint.ConstraintLayout>

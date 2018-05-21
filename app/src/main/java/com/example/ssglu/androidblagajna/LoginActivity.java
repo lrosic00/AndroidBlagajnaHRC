@@ -20,6 +20,7 @@ public class LoginActivity extends AppCompatActivity {
 
     EditText etUsername,etPassword;
     Button btnLogin;
+    UserInfoClass userInfo = new UserInfoClass();
     TextView tvRegister;
 
     @Override
@@ -29,24 +30,21 @@ public class LoginActivity extends AppCompatActivity {
         getSupportActionBar().hide(); //hide action bar
 
 
-        // MAKNI KASNIJE
-        Intent intent = new Intent(LoginActivity.this,ArticlesActivity.class);
-        LoginActivity.this.startActivity(intent);
-        //--------------
+
 
         etUsername = (EditText)findViewById(R.id.etUsername);
         etPassword = (EditText)findViewById(R.id.etPassword);
 
         btnLogin = (Button)findViewById(R.id.btnLogin);
-        tvRegister = (TextView)findViewById(R.id.tvRegister);
+//        tvRegister = (TextView)findViewById(R.id.tvRegister);
 
-        tvRegister.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent registerIntent = new Intent(LoginActivity.this,RegisterActivity.class);
-                startActivity(registerIntent);
-            }
-        });
+//        tvRegister.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent registerIntent = new Intent(LoginActivity.this,RegisterActivity.class);
+//                startActivity(registerIntent);
+//            }
+//        });
 
         btnLogin.setOnClickListener(new View.OnClickListener()
         {
@@ -66,14 +64,34 @@ public class LoginActivity extends AppCompatActivity {
 
                             if(success){
 
-                                String fullName = jsonResponse.getString("fullName");
-                                int age = jsonResponse.getInt("Age");
+//                                String fullName = jsonResponse.getString("fullName");
+//////                                int age = jsonResponse.getInt("Age");
+//////                                int id_user = jsonResponse.getInt("id_user");
+//////
+//////                                boolean isAdmin;
+                                userInfo.id_user = jsonResponse.getInt("id_user");
+                                userInfo.username = username;
+                                userInfo.fullName = jsonResponse.getString("fullName");
+                                userInfo.password = password;
+                                userInfo.age = jsonResponse.getInt("Age");
 
-                                Intent intent = new Intent(LoginActivity.this,ArticlesActivity.class);
+                                if(jsonResponse.getInt("IsAdmin")==1)
+                                    userInfo.isAdmin = true;
+                                else
+                                    userInfo.isAdmin = false;
 
-                                intent.putExtra("username",username);
-                                intent.putExtra("fullName",fullName);
-                                intent.putExtra("age",age);
+
+
+                                Intent intent = new Intent(LoginActivity.this,IndexActivity.class);
+
+//                                intent.putExtra("id_user",id_user);
+//                                intent.putExtra("username",username);
+//                                intent.putExtra("fullName",fullName);
+//                                intent.putExtra("password",password);
+//                                intent.putExtra("age",age);
+//                                intent.putExtra("IsAdmin",isAdmin);
+                                intent.putExtra("userInfo",userInfo);
+
 
                                 LoginActivity.this.startActivity(intent);
 
