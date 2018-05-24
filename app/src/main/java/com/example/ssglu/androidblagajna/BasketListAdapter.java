@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -32,7 +33,7 @@ public class BasketListAdapter extends ArrayAdapter<ArticleClass>{
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 
         LayoutInflater myInflater = LayoutInflater.from(getContext());
-        View customView = myInflater.inflate(R.layout.basket_product_list,parent,false);
+        final View customView = myInflater.inflate(R.layout.basket_product_list,parent,false);
 
         if(!getItem(position).isVisible) return customView;
         TextView tvName = (TextView)customView.findViewById(R.id.tvName);
@@ -49,6 +50,13 @@ public class BasketListAdapter extends ArrayAdapter<ArticleClass>{
 
 
 
+        btnDel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getContext(), "KLIKNUO X VALJDA",Toast.LENGTH_SHORT).show();
+
+            }
+        });
 
 
 
