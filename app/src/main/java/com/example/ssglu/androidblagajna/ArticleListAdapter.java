@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,13 +31,20 @@ public class ArticleListAdapter extends ArrayAdapter<ArticleClass>{
         return super.getItem(position);
     }
 
+
     @NonNull
     @Override
     public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         LayoutInflater myInflater = LayoutInflater.from(getContext());
         View customView = myInflater.inflate(R.layout.item_product_list,parent,false);
 
-        if(!getItem(position).isVisible) return customView;
+        if(!getItem(position).isVisible){
+            customView.setVisibility(View.GONE);
+            customView.destroyDrawingCache();
+
+
+            return customView;
+        }
         TextView tvName = (TextView)customView.findViewById(R.id.tvName);
         TextView tvPrice = (TextView)customView.findViewById(R.id.tvPrice);
         TextView tvQuant = (TextView)customView.findViewById(R.id.tvQuantity);

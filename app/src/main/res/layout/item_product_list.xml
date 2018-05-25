@@ -11,7 +11,6 @@
         android:baselineAligned="false"
         android:gravity="left|center_vertical|center_horizontal"
         android:paddingLeft="5dp"
-        android:text="TextView"
         android:textSize="20sp" />
 
     <TextView
@@ -21,7 +20,6 @@
         android:layout_weight="1"
         android:baselineAligned="false"
         android:gravity="center"
-        android:text="TextView"
         android:textSize="20sp" />
 
     <TextView
@@ -31,7 +29,6 @@
         android:layout_weight="1"
         android:baselineAligned="false"
         android:gravity="center"
-        android:text="TextView"
         android:textSize="20sp" />
 
     <TextView
@@ -41,6 +38,5 @@
         android:layout_weight="1"
         android:baselineAligned="false"
         android:gravity="center"
-        android:text="TextView"
         android:textSize="20sp" />
 </LinearLayout>
