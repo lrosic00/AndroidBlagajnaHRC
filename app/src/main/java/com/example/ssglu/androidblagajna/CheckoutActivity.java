@@ -89,6 +89,8 @@ public class CheckoutActivity extends AppCompatActivity {
                     queue.add(dbUpdateREQ);
                 }
 
+                finish();
+
 
             }
         });

@@ -38,7 +38,7 @@ public class IndexActivity extends AppCompatActivity {
 //        isAdmin = intent.getBooleanExtra("IsAdmin",false);
         userInfo = (UserInfoClass)intent.getSerializableExtra("userInfo");
 
-        if(userInfo.isAdmin){
+        if(userInfo != null && userInfo.isAdmin){
             btnModDB.setVisibility(View.VISIBLE);
             btnRegister.setVisibility(View.VISIBLE);
         }
@@ -63,6 +63,15 @@ public class IndexActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent newIntent = new Intent(IndexActivity.this,AccSettingsActivity.class);
+                newIntent.putExtra("userInfo",userInfo);
+                startActivity(newIntent);
+            }
+        });
+
+        btnModDB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent newIntent = new Intent(IndexActivity.this,ModifyDatabaseActivity.class);
                 newIntent.putExtra("userInfo",userInfo);
                 startActivity(newIntent);
             }

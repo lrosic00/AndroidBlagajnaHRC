@@ -45,6 +45,7 @@ public class ArticlesActivity extends AppCompatActivity {
     Button btnCheckout;
     Toast toastMessage;
 
+    boolean disableSorting = false;
     boolean nameAscDesc = true,priceAscDesc= true,quantAscDesc= true,catAscDesc= true;
 
 
@@ -70,6 +71,7 @@ public class ArticlesActivity extends AppCompatActivity {
                 Intent intent = new Intent(ArticlesActivity.this,CheckoutActivity.class);
                 intent.putExtra("basket",basket);
                 ArticlesActivity.this.startActivity(intent);
+                finish();
             }
         });
         imgCheckout.setOnClickListener(new View.OnClickListener() {
@@ -125,6 +127,18 @@ public class ArticlesActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 FilterListOfArticles(s.toString());
+                if(s.toString().isEmpty()) {
+                    nameAscDesc = true;
+                    disableSorting = false;
+                    SortListOfArticles("name");
+
+                }
+                else {
+                    nameAscDesc = true;
+                    disableSorting = true;
+                    SortListOfArticles("name");
+                    SortArticlesByVisibility();
+                }
 
                 ShowDataToListView();
             }
@@ -201,13 +215,23 @@ public class ArticlesActivity extends AppCompatActivity {
 
 
     }
+    void SortArticlesByVisibility(){
+        Collections.sort(list, new Comparator<ArticleClass>() {
+            @Override
+            public int compare(ArticleClass o1, ArticleClass o2) {
+                return Boolean.compare(o2.isVisible,o1.isVisible);
+            }
+        });
+
+    }
 
 
 
 
     void OnClickOrderBy(View v){
         Button b = (Button)v;
-        SortListOfArticles(b.getText().toString());
+        if(!disableSorting)
+            SortListOfArticles(b.getText().toString());
         ShowDataToListView();
 
     }
@@ -216,6 +240,7 @@ public class ArticlesActivity extends AppCompatActivity {
         switch (parametar){
             case "name":
                 if (nameAscDesc) {
+                    SortArticlesByVisibility();
                     nameAscDesc = false;
                     Collections.sort(list, new Comparator<ArticleClass>() {
                         @Override
@@ -225,6 +250,7 @@ public class ArticlesActivity extends AppCompatActivity {
                     });
                 }
                 else {
+                    SortArticlesByVisibility();
                     nameAscDesc=true;
                     Collections.sort(list, new Comparator<ArticleClass>() {
                         @Override
@@ -246,6 +272,7 @@ public class ArticlesActivity extends AppCompatActivity {
 //                });
 //                break;
                 if (priceAscDesc) {
+                    SortArticlesByVisibility();
                     priceAscDesc = false;
                     Collections.sort(list, new Comparator<ArticleClass>() {
                         @Override
@@ -255,6 +282,7 @@ public class ArticlesActivity extends AppCompatActivity {
                     });
                 }
                 else {
+                    SortArticlesByVisibility();
                     priceAscDesc=true;
                     Collections.sort(list, new Comparator<ArticleClass>() {
                         @Override
@@ -264,6 +292,7 @@ public class ArticlesActivity extends AppCompatActivity {
                     });
 
                 }
+                break;
 
             case "quantity":
 
@@ -275,20 +304,24 @@ public class ArticlesActivity extends AppCompatActivity {
 //                    }
 //                });
                 if (quantAscDesc) {
+                    SortArticlesByVisibility();
                     quantAscDesc = false;
                     Collections.sort(list, new Comparator<ArticleClass>() {
                         @Override
                         public int compare(ArticleClass o1, ArticleClass o2) {
-                            return Integer.toString(o1.quantity).compareTo(Integer.toString(o2.quantity));
+                            return  Integer.compare(o1.quantity,o2.quantity);
+//                            return Integer.toString(o1.quantity).compareTo(Integer.toString(o2.quantity));
                         }
                     });
                 }
                 else {
+                    SortArticlesByVisibility();
                     quantAscDesc=true;
                     Collections.sort(list, new Comparator<ArticleClass>() {
                         @Override
                         public int compare(ArticleClass o1, ArticleClass o2) {
-                            return Integer.toString(o2.quantity).compareTo(Integer.toString(o1.quantity));
+                            return Integer.compare(o2.quantity,o1.quantity);
+//                            return Integer.toString(o2.quantity).compareTo(Integer.toString(o1.quantity));
                         }
                     });
 
@@ -305,6 +338,7 @@ public class ArticlesActivity extends AppCompatActivity {
 //                    }
 //                });
                 if (catAscDesc) {
+                    SortArticlesByVisibility();
                     catAscDesc = false;
                     Collections.sort(list, new Comparator<ArticleClass>() {
                         @Override
@@ -314,6 +348,7 @@ public class ArticlesActivity extends AppCompatActivity {
                     });
                 }
                 else {
+                    SortArticlesByVisibility();
                     catAscDesc=true;
                     Collections.sort(list, new Comparator<ArticleClass>() {
                         @Override

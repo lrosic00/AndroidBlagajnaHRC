@@ -36,39 +36,53 @@ public class RegisterActivity extends AppCompatActivity {
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (!etUsername.getText().toString().isEmpty() &&
+                        !etFullName.getText().toString().isEmpty() &&
+                        !etPassword.getText().toString().isEmpty() &&
+                        !etAge.getText().toString().isEmpty()) {
 
-                final String username = etUsername.getText().toString();
-                final String fullName = etFullName.getText().toString();
-                final String password = etPassword.getText().toString();
-                final int age  = Integer.parseInt(etAge.getText().toString());
 
-                Response.Listener<String> responseListener = new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
+                    final String username = etUsername.getText().toString();
+                    final String fullName = etFullName.getText().toString();
+                    final String password = etPassword.getText().toString();
+                    final int age  = Integer.parseInt(etAge.getText().toString());
 
-                        try {
-                            JSONObject jsonResponse = new JSONObject(response);
-                            boolean success = jsonResponse.getBoolean("success");
 
-                            if(success){
-                                Intent intent = new Intent(RegisterActivity.this,IndexActivity.class);
-                                RegisterActivity.this.startActivity(intent);
-                            }else{
-                                AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
-                                builder.setMessage("Register failed")
-                                        .setNegativeButton("Retry",null)
-                                        .create()
-                                        .show();
+
+                    Response.Listener<String> responseListener = new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+
+                            try {
+                                JSONObject jsonResponse = new JSONObject(response);
+                                boolean success = jsonResponse.getBoolean("success");
+
+                                if(success){
+                                    Intent intent = new Intent(RegisterActivity.this,IndexActivity.class);
+                                    RegisterActivity.this.startActivity(intent);
+                                }else{
+                                    AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
+                                    builder.setMessage("Register failed")
+                                            .setNegativeButton("Retry",null)
+                                            .create()
+                                            .show();
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
                             }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
                         }
-                    }
-                };
+                    };
 
-                RegisterRequest registerREQ = new RegisterRequest(username,fullName,password,age,responseListener);
-                RequestQueue queue = Volley.newRequestQueue(RegisterActivity.this);
-                queue.add(registerREQ);
+                    RegisterRequest registerREQ = new RegisterRequest(username,fullName,password,age,responseListener);
+                    RequestQueue queue = Volley.newRequestQueue(RegisterActivity.this);
+                    queue.add(registerREQ);
+                } else {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
+                    builder.setMessage("Please fill all fields")
+                            .setNegativeButton("Retry",null)
+                            .create()
+                            .show();
+                }
 
 
             }

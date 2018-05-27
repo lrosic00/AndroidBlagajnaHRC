@@ -22,7 +22,8 @@
         <activity android:name=".IndexActivity" />
         <activity android:name=".ArticlesActivity" />
         <activity android:name=".CheckoutActivity" />
-        <activity android:name=".AccSettingsActivity"></activity>
+        <activity android:name=".AccSettingsActivity" />
+        <activity android:name=".ModifyDatabaseActivity"></activity>
     </application>
 
 </manifest>
