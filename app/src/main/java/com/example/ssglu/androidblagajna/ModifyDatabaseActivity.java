@@ -1,7 +1,10 @@
 package com.example.ssglu.androidblagajna;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.android.volley.RequestQueue;
@@ -19,13 +22,23 @@ public class ModifyDatabaseActivity extends AppCompatActivity {
     List list;
     ListView listView;
     ModifiyDatabaseAdapter adapter;
+    Button addNewRow;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_modify_database);
 
+        addNewRow = (Button)findViewById(R.id.btnAddNewRow);
         listView = (ListView)findViewById(R.id.listView);
         list = new ArrayList<ArticleClass>();
+
+        addNewRow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent newIntent = new Intent(ModifyDatabaseActivity.this,DatabaseRowActivity.class);
+                startActivity(newIntent);
+            }
+        });
 
         GetJSONFromDB();
 

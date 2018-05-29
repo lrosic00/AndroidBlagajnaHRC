@@ -23,7 +23,8 @@
         <activity android:name=".ArticlesActivity" />
         <activity android:name=".CheckoutActivity" />
         <activity android:name=".AccSettingsActivity" />
-        <activity android:name=".ModifyDatabaseActivity"></activity>
+        <activity android:name=".ModifyDatabaseActivity" />
+        <activity android:name=".DatabaseRowActivity"></activity>
     </application>
 
 </manifest>
