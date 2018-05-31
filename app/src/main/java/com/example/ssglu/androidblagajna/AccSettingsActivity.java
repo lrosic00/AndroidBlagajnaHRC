@@ -24,6 +24,7 @@ public class AccSettingsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_acc_settings);
+        getSupportActionBar().hide(); //hide action bar
 
         Intent intent = getIntent();
         userInfo = (UserInfoClass)intent.getSerializableExtra("userInfo");

@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -41,9 +42,9 @@ public class ArticlesActivity extends AppCompatActivity {
     ArrayList<ArticleClass> list ;
     ArrayList<ArticleClass> basket;
     ListAdapter adapter;
-    ImageView imgCheckout;
     Button btnCheckout;
     Toast toastMessage;
+    ImageButton imgCheckout;
 
     boolean disableSorting = false;
     boolean nameAscDesc = true,priceAscDesc= true,quantAscDesc= true,catAscDesc= true;
@@ -55,7 +56,7 @@ public class ArticlesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_articles);
         getSupportActionBar().hide(); //hide action bar
 
-        imgCheckout = (ImageView)findViewById(R.id.imgCheckout);
+        imgCheckout = (ImageButton) findViewById(R.id.imgBtnCheckout);
         listView = (ListView) findViewById(R.id.listView);
         list = new ArrayList<ArticleClass>();
         basket = new ArrayList<ArticleClass>();
@@ -74,14 +75,7 @@ public class ArticlesActivity extends AppCompatActivity {
                 finish();
             }
         });
-        imgCheckout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(ArticlesActivity.this,CheckoutActivity.class);
-                intent.putExtra("basket",basket);
-                startActivity(intent);
-            }
-        });
+
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -110,7 +104,7 @@ public class ArticlesActivity extends AppCompatActivity {
                     Toast.LENGTH_SHORT);
             toastMessage.show();
 
-            if(basket.size()>0) imgCheckout.setVisibility(View.VISIBLE);
+//            if(basket.size()>0) imgCheckout.setVisibility(View.VISIBLE);
             if(basket.size()>0) btnCheckout.setVisibility(View.VISIBLE);
 
         }

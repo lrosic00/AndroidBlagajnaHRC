@@ -6,6 +6,19 @@
     android:layout_height="match_parent"
     tools:context=".ArticlesActivity">
 
+    <ImageButton
+        android:id="@+id/imgBtnCheckout"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:scaleType="fitXY"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="h,1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/basket" />
+
     <ImageView
         android:id="@+id/imgCheckout"
         android:layout_width="60dp"

@@ -15,6 +15,13 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.List;
 
 public class ModifiyDatabaseAdapter extends ArrayAdapter<ArticleClass> {
@@ -63,11 +70,8 @@ public class ModifiyDatabaseAdapter extends ArrayAdapter<ArticleClass> {
             @Override
             public void onClick(View view) {
 
+                openDialog(getItem(position).id,position);
 
-                openDialog();
-
-
-//                remove(getItem(position));
             }
         });
 
@@ -92,7 +96,8 @@ public class ModifiyDatabaseAdapter extends ArrayAdapter<ArticleClass> {
         super.remove(object);
     }
 
-    public void openDialog() {
+    public void openDialog(final int id, final int position) {
+
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getContext());
         alertDialogBuilder.setMessage("Are you sure you want to delete this item from database?");
 
@@ -100,6 +105,38 @@ public class ModifiyDatabaseAdapter extends ArrayAdapter<ArticleClass> {
             @Override
             public void onClick(DialogInterface arg0, int arg1) {
 
+                Response.Listener<String> responseLsitener = new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        try {
+                            JSONObject jsonResponse = new JSONObject(response);
+                            boolean success = jsonResponse.getBoolean("success");
+
+                            if(success){
+                                android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(getContext());
+                                builder.setMessage("Update Success")
+                                        .setNegativeButton("Continue",null)
+                                        .create()
+                                        .show();
+                            }
+                            else{
+                                android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(getContext());
+                                builder.setMessage("Update failed")
+                                        .setNegativeButton("Retry",null)
+                                        .create()
+                                        .show();
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                };
+                RequestQueue queue = Volley.newRequestQueue(getContext());
+                DbUpdateRequest dbUpdateREQ = new DbUpdateRequest(id,responseLsitener);
+                queue.add(dbUpdateREQ);
+                remove(getItem(position));
 
             }
         });

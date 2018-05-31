@@ -9,6 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:gravity="center"
         android:text="TextView" />
 
     <TextView
@@ -16,6 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:gravity="center"
         android:text="TextView" />
 
     <EditText
@@ -25,6 +27,7 @@
         android:layout_weight="1"
         android:baselineAligned="false"
         android:ems="10"
+        android:gravity="center"
         android:inputType="textPersonName"
         android:text="Name" />
 
@@ -33,11 +36,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:gravity="center"
         android:text="TextView" />
 
     <ImageButton
         android:id="@+id/imgDel"
-        android:layout_width="350dp"
+        android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_weight="1"
         app:srcCompat="@android:drawable/ic_delete" />

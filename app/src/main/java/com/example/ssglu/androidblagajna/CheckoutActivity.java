@@ -31,6 +31,7 @@ public class CheckoutActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_checkout);
+        getSupportActionBar().hide(); //hide action bar
 
         btnFinish = (Button)findViewById(R.id.btnFinish);
         basket = new ArrayList<ArticleClass>();
@@ -89,7 +90,7 @@ public class CheckoutActivity extends AppCompatActivity {
                     queue.add(dbUpdateREQ);
                 }
 
-                finish();
+//                finish();
 
 
             }

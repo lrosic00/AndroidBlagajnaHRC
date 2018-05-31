@@ -27,6 +27,7 @@ public class ModifyDatabaseActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_modify_database);
+        getSupportActionBar().hide(); //hide action bar
 
         addNewRow = (Button)findViewById(R.id.btnAddNewRow);
         listView = (ListView)findViewById(R.id.listView);
